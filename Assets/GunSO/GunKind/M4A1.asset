@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: M4A1
   m_EditorClassIdentifier: 
   ImpactType: {fileID: 0}
-  Type: 0
-  Name: 
-  ModelPrefab: {fileID: 0}
+  Type: 1
+  Name: M4A1
+  ModelPrefab: {fileID: 919132149155446097, guid: 5e945068590a33c42b91d8043ab18f8b, type: 3}
   SpawnPoint: {x: 0, y: 0, z: 0}
   SpawnRotation: {x: 0, y: 0, z: 0}
-  ShootConfig: {fileID: 0}
-  TrailConfig: {fileID: 0}
+  ShootConfig: {fileID: 11400000, guid: 6c671f1a9963542478d1c6440cc1b847, type: 2}
+  TrailConfig: {fileID: 11400000, guid: 79c1328b195bf3b4497caa97d3949cd7, type: 2}
