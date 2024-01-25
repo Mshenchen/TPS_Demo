@@ -1,3 +1,4 @@
+using Cinemachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -30,6 +31,7 @@ public class PlayerController : MonoBehaviour
 
     private bool isRotateOnMove = true;
     // 相机
+    private CinemachineVirtualCamera playerFollowCamera;
     private GameObject mainCamera;
     public GameObject CinemachineCameraTarget;
     private float _cinemachineTargetYaw;
@@ -77,6 +79,8 @@ public class PlayerController : MonoBehaviour
             mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
         }
         animator = GetComponent<Animator>();
+        playerFollowCamera = GameObject.Find("PlayerFollowCamera").GetComponent<CinemachineVirtualCamera>();
+        playerFollowCamera.Follow = CinemachineCameraTarget.transform;
     }
 
     private void Start()
