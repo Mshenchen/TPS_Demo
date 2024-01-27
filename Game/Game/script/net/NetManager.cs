@@ -125,7 +125,6 @@ class NetManager
 
 	//数据处理
 	public static void OnReceiveData(ClientState state){
-		Console.WriteLine("OnReceiveData");
 		ByteArray readBuff = state.readBuff;
 		//消息长度
 		if(readBuff.length <= 2) {
@@ -153,7 +152,6 @@ class NetManager
 		//分发消息
 		MethodInfo mi = typeof(MsgHandler).GetMethod(protoName);
 		object[] o = {state,msgBase};
-		Console.WriteLine("Receive " + protoName);
 		if(mi!=null)
 		{
 			mi.Invoke(null, o);

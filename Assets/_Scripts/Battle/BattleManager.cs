@@ -116,17 +116,22 @@ public class BattleManager
     private static void GeneratePlayer(RoleInfo roleInfo)
     {
         string objName = "Player_" + roleInfo.id;
-        GameObject playerObj = new GameObject(objName);
+        //GameObject playerObj = new GameObject(objName);
         BasePlayer player = null;
         if(roleInfo.id == GameMain.id)
         {
-            player = playerObj.AddComponent<CtrlPlayer>();
-            player.Init("Player");
+            GameObject playerObj = ResMgr.Instance.Load<GameObject>("MyPlayer");
+            playerObj.gameObject.name = objName;
+            if (playerObj != null)
+            {
+                player = playerObj.GetComponent<CtrlPlayer>();
+            }
         }
         else
         {
-            player = playerObj.AddComponent<SyncPlayer>();
-            player.Init("OtherPlayer");
+            GameObject playerObj = ResMgr.Instance.Load<GameObject>("OtherPlayer");
+            playerObj.gameObject.name = objName;
+            player = playerObj.GetComponent<SyncPlayer>();
         }
         //camera
         player.camp = roleInfo.camp;

@@ -11,7 +11,7 @@ public class LoginPanel : BasePanel
     public InputField PwInput;
     private Button loginBtn;
     private Button registerBtn;
-    
+    private Button connectBtn;
     void Start()
     {
         
@@ -22,14 +22,23 @@ public class LoginPanel : BasePanel
         Debug.Log("OnShow====LoginPanel");
         loginBtn = this.transform.Find("LoginBtn").GetComponent<Button>();
         registerBtn = this.transform.Find("RegisterBtn").GetComponent<Button>();
+        connectBtn = this.transform.Find("ConnectBtn").GetComponent<Button>();
         loginBtn.onClick.AddListener(OnLoginClick);
         registerBtn.onClick.AddListener(OnRegisterClick);
+        connectBtn.onClick.AddListener(OnConnectClick);
         //网络协议监听
         NetManager.AddMsgListener("MsgLogin", OnMsgLogin);
         //网络事件监听
         NetManager.AddEventListener(NetManager.NetEvent.ConnectSucc, OnConnectSucc);
         NetManager.AddEventListener(NetManager.NetEvent.ConnectFail, OnConnectFail);
         NetManager.Connect("127.0.0.1", 8888);
+    }
+
+    private void OnConnectClick()
+    {
+      
+        NetManager.Connect("127.0.0.1", 8888);
+        Debug.Log("OnShow====OnConnectClick");
     }
 
     private void OnMsgLogin(MsgBase msgBase)

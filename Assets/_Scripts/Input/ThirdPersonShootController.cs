@@ -27,7 +27,7 @@ public class ThirdPersonShootController : BasePlayer
         playerController = GetComponent<PlayerController>();
         animator = GetComponent<Animator>();
         aimVirtualCamera = GameObject.Find("Cameras").transform.Find("PlayerAimCamera").GetComponent<CinemachineVirtualCamera>();
-        aimVirtualCamera.Follow = this.transform.GetChild(2);
+        aimVirtualCamera.Follow = this.transform.GetChild(0).GetChild(2);
     }
 
     void Start()

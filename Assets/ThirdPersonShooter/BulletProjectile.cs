@@ -29,15 +29,15 @@ public class BulletProjectile : MonoBehaviour {
 
     private void OnCollisionEnter(Collision other) {
 
-        //if (other.gameObject.GetComponent<BulletTarget>() != null)
+        //if (other.gameobject.getcomponent<bullettarget>() != null)
         //{
-        //    Instantiate(vfxHitGreen, transform.position, Quaternion.identity);
+        //    instantiate(vfxhitgreen, transform.position, quaternion.identity);
         //}
         //else
         //{
-        //    Instantiate(vfxHitRed, transform.position, Quaternion.identity);
+        //    instantiate(vfxhitred, transform.position, quaternion.identity);
         //}
-        //Destroy(gameObject);
+        //destroy(gameobject);
         GameObject collObj = other.gameObject;
         BasePlayer hitPlayer = collObj.GetComponent<BasePlayer>();
         //TODO:不能打自己

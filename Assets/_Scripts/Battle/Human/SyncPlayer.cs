@@ -1,4 +1,4 @@
-using System.Collections;
+锘縰sing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,12 +11,6 @@ public class SyncPlayer : BasePlayer
     private float forecastTime;
     private void Awake()
     {
-        
-    }
-    public override void Init(string playerPath)
-    {
-        base.Init(playerPath);
-        //TODO:不受物理的影响
         lastPos = transform.position;
         lastRot = transform.eulerAngles;
         forecastPos = transform.position;
@@ -38,6 +32,7 @@ public class SyncPlayer : BasePlayer
         Quaternion forcastQuat = Quaternion.Euler(forecastRot);
         quat = Quaternion.Lerp(quat, forcastQuat,t);
         transform.rotation = quat;
+      
     }
     public void SyncPos(MsgSyncPlayer msg)
     {
@@ -48,7 +43,7 @@ public class SyncPlayer : BasePlayer
         lastPos = pos;
         lastRot = rot;
         forecastTime = Time.time;
-        //TODO:炮塔同步
+        //TODO:鐐鍚屾 
     }
     public void SyncFire(MsgFire msg)
     {
