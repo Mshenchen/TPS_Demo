@@ -15,6 +15,8 @@ public class InputReader : ScriptableObject,GameInput.IGameplayActions,GameInput
     public event Action<bool> SprintEvent;
     public event Action<bool> AimEvent;
     public event Action<bool> ShootEvent;
+    public event Action<bool> EquipEvent;
+    public event Action<bool> SwitchWeaponEvent;
     public event Action ResumeEvent;
     public event Action PauseEvent;
     
@@ -116,6 +118,28 @@ public class InputReader : ScriptableObject,GameInput.IGameplayActions,GameInput
         {
             ResumeEvent?.Invoke();
             SetGameplay();
+        }
+    }
+
+    public void OnEquip(InputAction.CallbackContext context)
+    {
+        switch (context.phase)
+        {
+            case InputActionPhase.Performed:
+                EquipEvent?.Invoke(true);
+                break;
+            
+        }
+    }
+
+    public void OnSwitchWeapon(InputAction.CallbackContext context)
+    {
+        switch (context.phase)
+        {
+            case InputActionPhase.Performed:
+                SwitchWeaponEvent?.Invoke(true);
+                break;
+
         }
     }
 }

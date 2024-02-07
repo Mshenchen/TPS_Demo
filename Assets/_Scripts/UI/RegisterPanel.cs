@@ -57,10 +57,10 @@ public class RegisterPanel : BasePanel
         NetManager.Send(msgReg);
     }
 
-    public void Close()
-    {
-        UIManager.Instance.HidePanel("RegisterPanel");
-    }
+    //public void Close()
+    //{
+    //    UIManager.Instance.HidePanel("RegisterPanel");
+    //}
     public override void OnHide()
     {
         NetManager.RemoveMsgListener("MsgRegister", OnMsgRegister);

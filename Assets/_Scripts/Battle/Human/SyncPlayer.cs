@@ -9,7 +9,7 @@ public class SyncPlayer : BasePlayer
     private Vector3 forecastPos;
     private Vector3 forecastRot;
     private float forecastTime;
-    private void Awake()
+    public override void Awake()
     {
         lastPos = transform.position;
         lastRot = transform.eulerAngles;

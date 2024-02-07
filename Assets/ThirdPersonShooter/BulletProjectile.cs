@@ -29,7 +29,16 @@ public class BulletProjectile : MonoBehaviour {
 
     private void OnCollisionEnter(Collision other) {
 
-        //if (other.gameobject.getcomponent<bullettarget>() != null)
+        if (other.gameObject.GetComponent<BulletTarget>() != null)
+        {
+            Instantiate(vfxHitGreen,transform.position, Quaternion.identity);
+        }
+        else
+        {
+            Instantiate(vfxHitRed,transform.position, Quaternion.identity);
+        }
+        Destroy(gameObject);
+        //if (other.getcomponent<bullettarget>() != null)
         //{
         //    instantiate(vfxhitgreen, transform.position, quaternion.identity);
         //}
@@ -37,14 +46,14 @@ public class BulletProjectile : MonoBehaviour {
         //{
         //    instantiate(vfxhitred, transform.position, quaternion.identity);
         //}
-        //destroy(gameobject);
-        GameObject collObj = other.gameObject;
-        BasePlayer hitPlayer = collObj.GetComponent<BasePlayer>();
-        //TODO:不能打自己
-        if (hitPlayer != null) 
-        {
-            SendMsgHit(player, hitPlayer);
-        }
+        //Destroy(gameobject);
+        //GameObject collObj = other.gameObject;
+        //BasePlayer hitPlayer = collObj.GetComponent<BasePlayer>();
+        ////TODO:不能打自己
+        //if (hitPlayer != null) 
+        //{
+        //    SendMsgHit(player, hitPlayer);
+        //}
     }
     void SendMsgHit(BasePlayer player,BasePlayer hitPlayer)
     {

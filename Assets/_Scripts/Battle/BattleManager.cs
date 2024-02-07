@@ -6,6 +6,7 @@ using UnityEngine;
 public class BattleManager
 {
     public static Dictionary<string,BasePlayer> players = new Dictionary<string,BasePlayer>();
+    
     public static void Init()
     {
         NetManager.AddMsgListener("MsgEnterBattle", OnMsgEnterBattle);
@@ -85,11 +86,11 @@ public class BattleManager
     private static void OnMsgBattleResult(MsgBase msgBase)
     {
         MsgBattleResult msg = (MsgBattleResult)msgBase;
-        bool isWin = false;
+        //bool isWin = false;
         BasePlayer player = GetCtrlPlayer();
         if(player != null&&player.camp == msg.winCamp)
         {
-            isWin = true;
+            //isWin = true;
         }
         //œ‘ æΩÁ√Ê
         UIManager.Instance.ShowPanel<ResultPanel>("ResultPanel");

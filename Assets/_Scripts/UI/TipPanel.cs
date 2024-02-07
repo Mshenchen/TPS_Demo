@@ -25,8 +25,8 @@ public class TipPanel : BasePanel
         CloseBtn.onClick.RemoveListener(Close);
     }
 
-    private void Close()
-    {
-        UIManager.Instance.HidePanel("TipPanel");
-    }
+    //public void Close()
+    //{
+    //    UIManager.Instance.HidePanel("TipPanel");
+    //}
 }

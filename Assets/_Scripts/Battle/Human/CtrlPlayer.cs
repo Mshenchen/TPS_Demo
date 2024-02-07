@@ -31,7 +31,8 @@ public class CtrlPlayer : BasePlayer
 
     private bool isRotateOnMove = true;
     // Па»ъ
-    private CinemachineVirtualCamera playerFollowCamera;
+    //private CinemachineVirtualCamera playerFollowCamera;
+    private CinemachineFreeLook playerFollowCamera;
     private GameObject mainCamera;
     public GameObject CinemachineCameraTarget;
     private float _cinemachineTargetYaw;
@@ -78,7 +79,7 @@ public class CtrlPlayer : BasePlayer
             mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
         }
         animator = GetComponent<Animator>();
-        playerFollowCamera = GameObject.Find("PlayerFollowCamera").GetComponent<CinemachineVirtualCamera>();
+        playerFollowCamera = GameObject.Find("PlayerFollowCamera").GetComponent<CinemachineFreeLook>();
         playerFollowCamera.Follow = CinemachineCameraTarget.transform;
     }
     private void Start()
