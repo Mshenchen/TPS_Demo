@@ -9,6 +9,7 @@ public class SyncPlayer : BasePlayer
     private Vector3 forecastPos;
     private Vector3 forecastRot;
     private float forecastTime;
+    private Animator animator;
     public override void Awake()
     {
         lastPos = transform.position;
@@ -16,6 +17,7 @@ public class SyncPlayer : BasePlayer
         forecastPos = transform.position;
         forecastRot = transform.eulerAngles;
         forecastTime = Time.time;
+        animator = GetComponent<Animator>();
     }
     private void Update()
     {
@@ -44,6 +46,15 @@ public class SyncPlayer : BasePlayer
         lastRot = rot;
         forecastTime = Time.time;
         //TODO:炮塔同步 
+    }
+    public void SyncAnim(MsgSyncAnim msg)
+    {
+        animator.SetFloat("Speed", msg.speedValue);
+        animator.SetBool("Jump", msg.jumpValue);
+        animator.SetBool("Grounded", msg.groundedValue);
+        animator.SetBool("FreeFall", msg.freefallValue);
+        animator.SetFloat("MotionSpeed", msg.motionSpeedValue);
+
     }
     public void SyncFire(MsgFire msg)
     {

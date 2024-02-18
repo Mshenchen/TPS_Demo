@@ -11,10 +11,25 @@ public class BasePlayer : MonoBehaviour
     public AudioClip LandingAudioClip;
     public AudioClip[] FootstepAudioClips;
     public CharacterController controller;
+    // animation IDs
+    [HideInInspector]public int animIDSpeed;
+    [HideInInspector] public int animIDGrounded;
+    [HideInInspector] public int animIDJump;
+    [HideInInspector] public int animIDFreeFall;
+    [HideInInspector] public int animIDMotionSpeed;
     [Range(0, 1)] public float FootstepAudioVolume = 0.5f;
     public virtual void Awake()
     {
         controller = this.GetComponent<CharacterController>();
+        AssignAnimationIDs();
+    }
+    private void AssignAnimationIDs()
+    {
+        animIDSpeed = Animator.StringToHash("Speed");
+        animIDGrounded = Animator.StringToHash("Grounded");
+        animIDJump = Animator.StringToHash("Jump");
+        animIDFreeFall = Animator.StringToHash("FreeFall");
+        animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
     }
     public void OnFootstep(AnimationEvent animationEvent)
     {

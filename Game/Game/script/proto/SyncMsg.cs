@@ -35,3 +35,13 @@ public class MsgHit : MsgBase
     public int hp = 0;
     public int damage = 0;
 }
+public class MsgSyncAnim : MsgBase
+{
+    public MsgSyncAnim() { protoName = "MsgSyncAnim"; }
+    public string id = "";
+    public float speedValue = 0f;
+    public bool jumpValue = false;
+    public bool groundedValue = false;
+    public bool freefallValue = false;
+    public float motionSpeedValue = 0f;
+}

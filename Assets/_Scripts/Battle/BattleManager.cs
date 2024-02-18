@@ -13,8 +13,21 @@ public class BattleManager
         NetManager.AddMsgListener("MsgBattleResult", OnMsgBattleResult);
         NetManager.AddMsgListener("MsgLeaveBattle", OnMsgLeaveBattle);
         NetManager.AddMsgListener("MsgSyncPlayer", OnMsgSyncPlayer);
+        NetManager.AddMsgListener("MsgSyncAnim", OnMsgSyncAnim);
         NetManager.AddMsgListener("MsgFire", OnMsgFire);
         NetManager.AddMsgListener("MsgHit", OnMsgHit);
+    }
+
+    private static void OnMsgSyncAnim(MsgBase msgBase)
+    {
+        MsgSyncAnim msg = (MsgSyncAnim)msgBase;
+        if (msg.id == GameMain.id)
+        {
+            return;
+        }
+        SyncPlayer player = (SyncPlayer)GetPlayer(msg.id);
+        if (player == null) return;
+        player.SyncAnim(msg);
     }
 
     private static void OnMsgHit(MsgBase msgBase)
@@ -93,7 +106,7 @@ public class BattleManager
             //isWin = true;
         }
         //œ‘ æΩÁ√Ê
-        UIManager.Instance.ShowPanel<ResultPanel>("ResultPanel");
+        //UIManager.Instance.ShowPanel<ResultPanel>("ResultPanel");
     }
 
     private static void OnMsgEnterBattle(MsgBase msgBase)

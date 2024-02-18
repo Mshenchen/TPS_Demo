@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Net.Security;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RaycastWeapon : MonoBehaviour
 {
@@ -26,6 +27,9 @@ public class RaycastWeapon : MonoBehaviour
     [SerializeField] private LayerMask aimColliderLayerMask = new LayerMask();
     public Transform bulletSpawnPos;
     public int fireRate = 20;
+    public GameObject magazine;
+    public int ammoCount;
+    public int clipSize;
     private Vector3 hitPoint;
     private Vector3 raycastDestination = Vector3.zero;
     private Ray ray;
@@ -97,7 +101,11 @@ public class RaycastWeapon : MonoBehaviour
 
     public void FireBullet()
     {
-        //lastTime = Time.time;
+        if(ammoCount <= 0)
+        {
+            return;
+        }
+        ammoCount--;
         foreach (ParticleSystem particle in muzzleFlash)
         {
             particle.Emit(1);

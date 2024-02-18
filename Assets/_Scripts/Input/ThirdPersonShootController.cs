@@ -10,6 +10,7 @@ using UnityEngine.Animations.Rigging;
 public class ThirdPersonShootController : MonoBehaviour
 {
     private CinemachineVirtualCamera aimVirtualCamera;
+    private CinemachineFreeLook playerFollowCamera;
     [SerializeField] private InputReader input;
     [SerializeField] private float normalSensitivity;
     [SerializeField] private float aimSensitivity;
@@ -32,12 +33,15 @@ public class ThirdPersonShootController : MonoBehaviour
     {
         ctrlPlayer = GetComponent<CtrlPlayer>();
         animator = GetComponent<Animator>();
-        aimVirtualCamera = GameObject.Find("Cameras").transform.Find("PlayerAimCamera").GetComponent<CinemachineVirtualCamera>();
-        aimVirtualCamera.Follow = this.transform.GetChild(0).GetChild(2);
+      
     }
 
     void Start()
     {
+        playerFollowCamera = GameObject.Find("Cameras").transform.Find("PlayerFollowCamera").GetComponent<CinemachineFreeLook>();
+        aimVirtualCamera = GameObject.Find("Cameras").transform.Find("PlayerAimCamera").GetComponent<CinemachineVirtualCamera>();
+        aimVirtualCamera.Follow = this.transform.GetChild(0).GetChild(2);
+        playerFollowCamera.LookAt = this.transform.GetChild(0).GetChild(2);
         input.AimEvent += HandleAim;
         input.ShootEvent += HandleShoot;
     }
@@ -52,12 +56,11 @@ public class ThirdPersonShootController : MonoBehaviour
         Aim();
         AdjustShootForward();
     }
-    private void OnAnimatorIK(int layerIndex)
+    public void LateUpdate()
     {
-       
-       
+        //aimVirtualCamera.transform.position = playerFollowCamera.transform.position;
     }
-    
+
     private void Aim()
     {
         if (isAim)
@@ -80,8 +83,6 @@ public class ThirdPersonShootController : MonoBehaviour
     {
         if (isShoot)
         {
-            
-            
             Vector3 worldAimTarget = mouseWorldPosition;
             worldAimTarget.y = transform.position.y;
             Vector3 aimDirection = (worldAimTarget - transform.position).normalized;
@@ -131,15 +132,15 @@ public class ThirdPersonShootController : MonoBehaviour
         Quaternion aimRotation = Quaternion.LookRotation(aimDirection);
         transform.localRotation = Quaternion.Lerp(transform.localRotation, aimRotation, Time.deltaTime * 20f);
     }
-    public void SetHandIK(float weight)
-    {
-        animator.SetIKPosition(AvatarIKGoal.RightHand, RightHandPosition.position);
-        animator.SetIKRotation(AvatarIKGoal.RightHand, RightHandPosition.rotation);
-        animator.SetIKPosition(AvatarIKGoal.LeftHand, LeftHandPosition.position);
-        animator.SetIKRotation(AvatarIKGoal.LeftHand, LeftHandPosition.rotation);
-        animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, weight);
-        animator.SetIKPositionWeight(AvatarIKGoal.RightHand, weight);
-        animator.SetIKRotationWeight(AvatarIKGoal.LeftHand, weight);
-        animator.SetIKRotationWeight(AvatarIKGoal.RightHand, weight);
-    }
+    //public void SetHandIK(float weight)
+    //{
+    //    animator.SetIKPosition(AvatarIKGoal.RightHand, RightHandPosition.position);
+    //    animator.SetIKRotation(AvatarIKGoal.RightHand, RightHandPosition.rotation);
+    //    animator.SetIKPosition(AvatarIKGoal.LeftHand, LeftHandPosition.position);
+    //    animator.SetIKRotation(AvatarIKGoal.LeftHand, LeftHandPosition.rotation);
+    //    animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, weight);
+    //    animator.SetIKPositionWeight(AvatarIKGoal.RightHand, weight);
+    //    animator.SetIKRotationWeight(AvatarIKGoal.LeftHand, weight);
+    //    animator.SetIKRotationWeight(AvatarIKGoal.RightHand, weight);
+    //}
 }

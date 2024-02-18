@@ -7,11 +7,11 @@ public class GameMain : MonoBehaviour
     public static string id = "";
     void Start()
     {
-        //NetManager.AddEventListener(NetManager.NetEvent.Close, OnConnectClose);
-        //NetManager.AddMsgListener("MsgKick", OnMsgKick);
-        ////初始化
-        //BattleManager.Init();
-        //UIManager.Instance.ShowPanel<LoginPanel>("LoginPanel");
+        NetManager.AddEventListener(NetManager.NetEvent.Close, OnConnectClose);
+        NetManager.AddMsgListener("MsgKick", OnMsgKick);
+        //初始化
+        BattleManager.Init();
+        UIManager.Instance.ShowPanel<LoginPanel>("LoginPanel");
     }
 
 

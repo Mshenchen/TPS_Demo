@@ -29191,6 +29191,7 @@ MonoBehaviour:
     m_Bits: 2147483647
   bulletSpawnPos: {fileID: 4823086532794197984}
   fireRate: 10
+  magazine: {fileID: 8359559109284098986}
 --- !u!114 &-5419168679610863961
 MonoBehaviour:
   m_ObjectHideFlags: 0

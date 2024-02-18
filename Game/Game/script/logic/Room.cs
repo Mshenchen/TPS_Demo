@@ -220,10 +220,11 @@ public class Room
             if(player.camp == 1) { count1++; }
             else { count2++; }
         }
-        if(count1 < 1 || count2 < 1)
-        {
-            return false;
-        }
+        //至少两人才能开战
+        //if(count1 < 1 || count2 < 1)
+        //{
+        //    return false;
+        //}
         return true;
     }
     public MsgBase ToMsg()

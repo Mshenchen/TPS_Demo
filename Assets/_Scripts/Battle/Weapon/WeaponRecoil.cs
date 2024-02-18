@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class WeaponRecoil : MonoBehaviour
 {
-    [HideInInspector]public CinemachineFreeLook playerAimCamera;
+    public CinemachineFreeLook playerAimCamera;
     [HideInInspector]public CinemachineImpulseSource cameraShake;
     public Vector2[] recoilPattern;
     float verticalRecoil;
@@ -16,6 +16,10 @@ public class WeaponRecoil : MonoBehaviour
     private void Awake()
     {
         cameraShake = GetComponent<CinemachineImpulseSource>();
+    }
+    private void Start()
+    {
+        playerAimCamera = GameObject.Find("Cameras").transform.Find("PlayerFollowCamera").GetComponent<CinemachineFreeLook>();
     }
     int NextIndex(int index)
     {
@@ -36,6 +40,7 @@ public class WeaponRecoil : MonoBehaviour
     
     private void Update()
     {
+        
         if (time > 0)
         {
             playerAimCamera.m_YAxis.Value -= ((verticalRecoil/1000)*Time.deltaTime)/duration;

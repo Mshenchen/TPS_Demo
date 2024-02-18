@@ -34,7 +34,7 @@ public class CtrlPlayer : BasePlayer
     //private CinemachineVirtualCamera playerFollowCamera;
     private CinemachineFreeLook playerFollowCamera;
     private GameObject mainCamera;
-    public GameObject CinemachineCameraTarget;
+    public Transform CinemachineCameraTarget;
     private float _cinemachineTargetYaw;
     private float _cinemachineTargetPitch;
     [Tooltip("为相机锁住时添加的角度")]
@@ -47,12 +47,7 @@ public class CtrlPlayer : BasePlayer
     [Tooltip("是否锁住相机位置")]
     public bool LockCameraPosition = false;
     private Animator animator;
-    // animation IDs
-    private int animIDSpeed;
-    private int animIDGrounded;
-    private int animIDJump;
-    private int animIDFreeFall;
-    private int animIDMotionSpeed;
+
    
     public float GroundedOffset = -0.14f;
     public bool Grounded = true;
@@ -69,7 +64,7 @@ public class CtrlPlayer : BasePlayer
     public float JumpHeight = 1.2f;
     public float Gravity = -15.0f;
     private float lastSendSyncTime = 0;
-    public static float syncInterval = 0.1f;
+    public static float syncInterval = 0.033f;
     public override void Awake()
     {
         base.Awake();
@@ -80,12 +75,12 @@ public class CtrlPlayer : BasePlayer
         }
         animator = GetComponent<Animator>();
         playerFollowCamera = GameObject.Find("PlayerFollowCamera").GetComponent<CinemachineFreeLook>();
+        CinemachineCameraTarget = this.transform.GetChild(0).GetChild(2);
         playerFollowCamera.Follow = CinemachineCameraTarget.transform;
     }
     private void Start()
     {
         _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
-        AssignAnimationIDs();
         input.LookEvent += HandleLook;
         input.MoveEvent += HandleMove;
         input.JumpEvent += HandleJump;
@@ -103,14 +98,6 @@ public class CtrlPlayer : BasePlayer
     public void LateUpdate()
     {
         CameraRotation();
-    }
-    private void AssignAnimationIDs()
-    {
-        animIDSpeed = Animator.StringToHash("Speed");
-        animIDGrounded = Animator.StringToHash("Grounded");
-        animIDJump = Animator.StringToHash("Jump");
-        animIDFreeFall = Animator.StringToHash("FreeFall");
-        animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
     }
     private void CameraRotation()
     {
@@ -296,6 +283,13 @@ public class CtrlPlayer : BasePlayer
         msg.ey = transform.eulerAngles.y;
         msg.ez = transform.eulerAngles.z;
         NetManager.Send(msg);
+        MsgSyncAnim msgAnim = new MsgSyncAnim();
+        msgAnim.speedValue = animator.GetFloat(animIDSpeed);
+        msgAnim.jumpValue = animator.GetBool(animIDJump);
+        msgAnim.groundedValue = animator.GetBool(animIDGrounded);
+        msgAnim.freefallValue = animator.GetBool(animIDFreeFall);
+        msgAnim.motionSpeedValue = animator.GetFloat(animIDMotionSpeed);
+        NetManager.Send(msgAnim);
     }
    
 }

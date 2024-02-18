@@ -28872,6 +28872,7 @@ GameObject:
   - component: {fileID: 33622092815827442}
   - component: {fileID: 23918483125366124}
   - component: {fileID: 1192280153}
+  - component: {fileID: -1871243925327242258}
   m_Layer: 0
   m_Name: pistol_1
   m_TagString: Untagged
@@ -28960,6 +28961,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a21524b55c5d5645844dd9c35a52d17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  recoil: {fileID: 0}
   weaponSlot: 1
   bulletSpeed: 1000
   bulletDrop: 1
@@ -28976,3 +28978,59 @@ MonoBehaviour:
     m_Bits: 9
   bulletSpawnPos: {fileID: 1836402537}
   fireRate: 20
+  magazine: {fileID: 0}
+  ammoCount: 0
+  clipSize: 0
+--- !u!114 &-1871243925327242258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1425814443739648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ImpulseDefinition:
+    m_ImpulseChannel: 1
+    m_ImpulseShape: 2
+    m_CustomImpulseShape:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_ImpulseDuration: 0.2
+    m_ImpulseType: 3
+    m_DissipationRate: 0.25
+    m_RawSignal: {fileID: 11400000, guid: 5cd8f891346e6ee4eb92bf9956627788, type: 2}
+    m_AmplitudeGain: 1
+    m_FrequencyGain: 1
+    m_RepeatMode: 0
+    m_Randomize: 1
+    m_TimeEnvelope:
+      m_AttackShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_DecayShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_AttackTime: 0
+      m_SustainTime: 0.2
+      m_DecayTime: 0.7
+      m_ScaleWithImpact: 1
+      m_HoldForever: 0
+    m_ImpactRadius: 100
+    m_DirectionMode: 0
+    m_DissipationMode: 2
+    m_DissipationDistance: 100
+    m_PropagationSpeed: 343
+  m_DefaultVelocity: {x: 0, y: -1, z: 0}

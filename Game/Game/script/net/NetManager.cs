@@ -85,7 +85,7 @@ class NetManager
 	//读取Clientfd
 	public static void ReadClientfd(Socket clientfd)
 	{
-        Console.WriteLine("ReadClientfd==ReadClientfd");
+        //Console.WriteLine("ReadClientfd==ReadClientfd");
         ClientState state = clients[clientfd];
 		ByteArray readBuff = state.readBuff;
 		//接收

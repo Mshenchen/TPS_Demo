@@ -19,8 +19,14 @@ public class Player {
 	public int roomId = -1;
 	public int camp = 1;
 	public int hp = 100;
-	//数据库数据
-	public PlayerData data;
+    //动画参数
+    public float speedValue = 0f;
+    public bool jumpValue = false;
+    public bool groundedValue = false;
+    public bool freefallValue = false;
+    public float motionSpeedValue = 0f;
+    //数据库数据
+    public PlayerData data;
 
 	//发送信息
 	public void Send(MsgBase msgBase){

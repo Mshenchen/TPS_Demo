@@ -53,7 +53,7 @@ public class RoomPanel : BasePanel
         }
         else
         {
-            TipMgr.Instance.ShowOneBtnTip("开战失败，两队至少需要有一名玩家，只有房主才可以开战");
+            TipMgr.Instance.ShowOneBtnTip("开战失败，只有房主才可以开战");
         }
     }
 

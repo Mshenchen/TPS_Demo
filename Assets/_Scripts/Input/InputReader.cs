@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 [CreateAssetMenu(menuName = "InputReader")]
 public class InputReader : ScriptableObject,GameInput.IGameplayActions,GameInput.IUIActions
 {
-    private GameInput _gameInput;
+    public GameInput _gameInput;
     public event Action<Vector2> MoveEvent;
     public event Action<Vector2> LookEvent;
     public event Action JumpEvent;
@@ -17,6 +17,7 @@ public class InputReader : ScriptableObject,GameInput.IGameplayActions,GameInput
     public event Action<bool> ShootEvent;
     public event Action<bool> EquipEvent;
     public event Action<bool> SwitchWeaponEvent;
+    public event Action<bool> ReloadBulletEvent;
     public event Action ResumeEvent;
     public event Action PauseEvent;
     
@@ -138,6 +139,17 @@ public class InputReader : ScriptableObject,GameInput.IGameplayActions,GameInput
         {
             case InputActionPhase.Performed:
                 SwitchWeaponEvent?.Invoke(true);
+                break;
+
+        }
+    }
+
+    public void OnReload(InputAction.CallbackContext context)
+    {
+        switch (context.phase)
+        {
+            case InputActionPhase.Performed:
+                ReloadBulletEvent?.Invoke(true);
                 break;
 
         }

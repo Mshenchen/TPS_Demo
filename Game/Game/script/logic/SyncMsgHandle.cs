@@ -21,7 +21,24 @@ public partial class MsgHandler {
 		msg.id = player.id;
 		room.Broadcast(msg);
 	}
-	public static void MsgHit(ClientState c,MsgBase msgBase)
+    public static void MsgSyncAnim(ClientState c, MsgBase msgBase)
+    {
+        MsgSyncAnim msg = (MsgSyncAnim)msgBase;
+        Player player = c.player;
+        if (player == null) { return; }
+        Room room = RoomManager.GetRoom(player.roomId);
+        if (room == null) { return; }
+        if (room.status != Room.Status.FIGHT) { return; }
+        //TODO:作弊检测
+        player.speedValue = msg.speedValue;
+        player.jumpValue = msg.jumpValue;
+        player.groundedValue = msg.groundedValue;
+        player.freefallValue = msg.freefallValue;
+        player.motionSpeedValue = msg.motionSpeedValue;
+        msg.id = player.id;
+        room.Broadcast(msg);
+    }
+    public static void MsgHit(ClientState c,MsgBase msgBase)
 	{
 		MsgHit msg = (MsgHit)msgBase;
 		Player player = c.player;

@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
+using UnityEngine.UI;
 using static UnityEngine.InputSystem.LowLevel.InputStateHistory;
 
 public class ActiveWeapon : MonoBehaviour
@@ -16,7 +17,7 @@ public class ActiveWeapon : MonoBehaviour
     }
     public Rig handIK;
     public Transform[] weaponSlots;
-    public bool isHolster;
+    public bool isHolster; // «∑Ò‘⁄±≥…œ
     private RaycastWeapon weapon;
     private bool isShoot;
     public Transform weaponLeftGrip;
@@ -25,10 +26,11 @@ public class ActiveWeapon : MonoBehaviour
     public CinemachineFreeLook playerAimCamera;
     RaycastWeapon[] equippedWeapons = new RaycastWeapon[2];
     int activeWeaponIndex;
-    // Start is called before the first frame update
+    public Text BulletNumText;
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.lockState = CursorLockMode.Locked;
+        BulletNumText = GameObject.Find("Canvas").transform.Find("BulletNumText").GetComponent<Text>();
         RaycastWeapon existingWeapon = GetComponentInChildren<RaycastWeapon>();
         if (existingWeapon != null)
         {
@@ -38,7 +40,10 @@ public class ActiveWeapon : MonoBehaviour
         input.EquipEvent += HandleEquip;
         input.SwitchWeaponEvent += HandleSwitchWeapon;
     }
-
+    public RaycastWeapon GetActiveWeapon()
+    {
+        return GetWeapon(activeWeaponIndex);
+    }
     private void HandleSwitchWeapon(bool context)
     {
         if(isHolster == false && equippedWeapons[activeWeaponIndex] != null)
@@ -94,6 +99,7 @@ public class ActiveWeapon : MonoBehaviour
             if(weapon.isFiring)
             {
                 weapon.Firing();
+                UpdateBulletNum(weapon);
             }
             weapon.UpdateBullets(Time.deltaTime);
         }
@@ -123,12 +129,13 @@ public class ActiveWeapon : MonoBehaviour
         {
             Destroy(weapon.gameObject);
         }
+       
         weapon = newWeapon;
         weapon.recoil.playerAimCamera = playerAimCamera;
         weapon.transform.SetParent(weaponSlots[weaponSlotIndex],false);
-        
         equippedWeapons[weaponSlotIndex] = weapon;
         SetActiveWeapon(newWeapon.weaponSlot);
+        UpdateBulletNum(weapon);
     }
     void SetActiveWeapon(WeaponSlot weaponSlot)
     {
@@ -174,5 +181,9 @@ public class ActiveWeapon : MonoBehaviour
             isHolster = false;
         }
         
+    }
+    public void UpdateBulletNum(RaycastWeapon weapon)
+    {
+        BulletNumText.text = weapon.ammoCount.ToString();
     }
 }
