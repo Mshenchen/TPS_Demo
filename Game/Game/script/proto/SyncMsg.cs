@@ -45,3 +45,8 @@ public class MsgSyncAnim : MsgBase
     public bool freefallValue = false;
     public float motionSpeedValue = 0f;
 }
+public class MsgSwitchWeapon : MsgBase
+{
+    public MsgSwitchWeapon() { protoName = "MsgSwitchWeapon"; }
+    public string PlayerId = "";
+}

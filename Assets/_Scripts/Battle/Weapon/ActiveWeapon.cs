@@ -56,6 +56,10 @@ public class ActiveWeapon : MonoBehaviour
             {
                 SetActiveWeapon(WeaponSlot.Primary);
             }
+            //同步切枪消息
+            MsgSwitchWeapon msg = new MsgSwitchWeapon();
+            msg.PlayerId = GameMain.id;
+            NetManager.Send(msg);
         }
     }
 

@@ -10,7 +10,7 @@ public interface IEventInfo
 public class EventInfo<T>:IEventInfo
 {
     public UnityAction<T> actions;
-
+    
     public EventInfo(UnityAction<T> action)
     {
         actions += action;

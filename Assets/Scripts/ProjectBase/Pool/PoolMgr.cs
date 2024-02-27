@@ -15,13 +15,14 @@ public class PoolData
         poolList = new List<GameObject>() { };
         PushObj(obj);
     }
-
+    //将对象放入对象池
     public void PushObj(GameObject obj)
     {
         obj.SetActive(false);
         poolList.Add(obj);
         obj.transform.parent = fatherObj.transform;
     }
+    //拿出对象
     public GameObject GetObj()
     {
         GameObject obj = null;
@@ -41,6 +42,7 @@ public class PoolMgr : BaseManager<PoolMgr>
     public Dictionary<string, PoolData> poolDic = new Dictionary<string, PoolData>();
 
     private GameObject poolObj;
+    //拿出对象
     public void GetObj(string name,UnityAction<GameObject> callBack)
     {
         if (poolDic.ContainsKey(name) && poolDic[name].poolList.Count > 0)
@@ -59,6 +61,7 @@ public class PoolMgr : BaseManager<PoolMgr>
             //obj.name = name;
         }
     }
+    //将对象放入对象池
     public void PushObj(string name, GameObject obj)
     {
         if (poolObj == null)

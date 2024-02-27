@@ -158,8 +158,16 @@ class NetManager
 		}
 		else
 		{
-			Console.WriteLine("OnReceiveData Invoke fail "+protoName);
-		}
+			
+            //Type msg = Type.GetType(protoName) as msgBase;
+            //Player player = state.player;
+            //if (player == null) { return; }
+            //Room room = RoomManager.GetRoom(player.roomId);
+            //if (room == null) { return; }
+            //if (room.status != Room.Status.FIGHT) { return; }
+            //room.Broadcast(msg);
+            //Console.WriteLine("OnReceiveData Invoke fail "+protoName);
+        }
 		//继续读取消息
 		if (readBuff.length > 2)
 		{

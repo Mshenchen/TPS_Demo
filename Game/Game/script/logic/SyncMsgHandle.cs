@@ -38,6 +38,16 @@ public partial class MsgHandler {
         msg.id = player.id;
         room.Broadcast(msg);
     }
+    public static void MsgSwitchWeapon(ClientState c, MsgBase msgBase)
+    {
+        MsgSwitchWeapon msg = (MsgSwitchWeapon)msgBase;
+        Player player = c.player;
+        if (player == null) { return; }
+        Room room = RoomManager.GetRoom(player.roomId);
+        if (room == null) { return; }
+        if (room.status != Room.Status.FIGHT) { return; }
+        room.Broadcast(msg);
+    }
     public static void MsgHit(ClientState c,MsgBase msgBase)
 	{
 		MsgHit msg = (MsgHit)msgBase;

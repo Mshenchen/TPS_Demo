@@ -36,7 +36,11 @@ public class MsgHit : MsgBase
     public int hp = 0;
     public int damage = 0;
 }
-
+public class MsgSwitchWeapon : MsgBase
+{
+    public MsgSwitchWeapon() { protoName = "MsgSwitchWeapon"; }
+    public string PlayerId = "";
+}
 public class MsgSyncAnim : MsgBase
 {
     public MsgSyncAnim() { protoName = "MsgSyncAnim"; }

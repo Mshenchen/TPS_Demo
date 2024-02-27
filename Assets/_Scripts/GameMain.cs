@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class GameMain : MonoBehaviour
 {
+   
     public static string id = "";
     void Start()
     {
+        //Cursor.lockState = CursorLockMode.Locked;
         NetManager.AddEventListener(NetManager.NetEvent.Close, OnConnectClose);
         NetManager.AddMsgListener("MsgKick", OnMsgKick);
         //初始化
